@@ -1,24 +1,39 @@
-﻿namespace AnyCompany
+﻿using AnyCompany.Implementations;
+using AnyCompany.Interfaces;
+
+namespace AnyCompany
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
-        private readonly OrderRepository orderRepository = new OrderRepository();
+        public IInvestecRepo Repo { get; set; }
+
+
+
+        public OrderService()
+        {
+            this.Repo = InvestecFactory.GetInvestecRepo();
+        }
+
 
         public bool PlaceOrder(Order order, int customerId)
         {
-            Customer customer = CustomerRepository.Load(customerId);
+            bool isValidCustomer, isValidOrder;
 
-            if (order.Amount == 0)
-                return false;
+            // Validate order
+            isValidOrder = Repo.ProcessOrderValidations(order);
 
-            if (customer.Country == "UK")
-                order.VAT = 0.2d;
-            else
-                order.VAT = 0;
+            //load customer
+            Customer customer = this.Repo.LoadCustomer(customerId);
 
-            orderRepository.Save(order);
+            // Validate customer
+            isValidCustomer = Repo.ProcessCustomerValidations(customer, order);
+
+            // Save order
+            if (isValidCustomer && isValidOrder)
+                Repo.Save(order);
 
             return true;
         }
+
     }
 }

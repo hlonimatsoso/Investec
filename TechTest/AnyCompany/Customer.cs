@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AnyCompany
 {
@@ -9,5 +10,8 @@ namespace AnyCompany
         public DateTime DateOfBirth { get; set; }
 
         public string Name { get; set; }
+
+        public List<Order> Orders { get; set; }
+
     }
 }

@@ -42,10 +42,22 @@
   <ItemGroup>
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerRepository.cs" />
+    <Compile Include="Implementations\InvestecRepo.cs" />
+    <Compile Include="Implementations\ValidateOrderAmount.cs" />
+    <Compile Include="Implementations\ValidateCustomerFromUS.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IInvestecRepo.cs" />
+    <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
+    <Compile Include="Interfaces\IValidateCustomer.cs" />
+    <Compile Include="Interfaces\IValidateOrder.cs" />
+    <Compile Include="Interfaces\IValidation.cs" />
+    <Compile Include="InvestecFactory.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
