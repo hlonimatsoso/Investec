@@ -11,9 +11,10 @@ namespace AnyCompany
         {
             Customer customer = new Customer();
 
-            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlConnection connection = default;
             try
             {
+                connection = new SqlConnection(ConnectionString);
                 connection.Open();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
@@ -33,7 +34,7 @@ namespace AnyCompany
             }
             finally
             {
-                connection.Close();
+                connection?.Close();
 
             }
 

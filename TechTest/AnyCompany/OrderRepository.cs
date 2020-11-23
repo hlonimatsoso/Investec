@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 
 namespace AnyCompany
 {
@@ -8,18 +9,29 @@ namespace AnyCompany
 
         public void Save(Order order)
         {
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
+            SqlConnection connection = default;
+            try
+            {
+                connection = new SqlConnection(ConnectionString);
+                connection.Open();
 
-            SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
+                SqlCommand command = new SqlCommand("INSERT INTO Orders VALUES (@OrderId, @Amount, @VAT)", connection);
 
-            command.Parameters.AddWithValue("@OrderId", order.OrderId);
-            command.Parameters.AddWithValue("@Amount", order.Amount);
-            command.Parameters.AddWithValue("@VAT", order.VAT);
+                command.Parameters.AddWithValue("@OrderId", order.OrderId);
+                command.Parameters.AddWithValue("@Amount", order.Amount);
+                command.Parameters.AddWithValue("@VAT", order.VAT);
 
-            command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Error saving order ID '{order?.OrderId}'", ex);
+            }
+            finally
+            {
+                connection?.Close();
+            }
 
-            connection.Close();
         }
     }
 }
