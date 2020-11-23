@@ -10,6 +10,5 @@ namespace AnyCompany.Interfaces
     {
          Customer LoadCustomer(int customerId);
 
-        bool ValidateCustomer(Customer customer);
     }
 }

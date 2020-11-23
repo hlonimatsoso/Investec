@@ -65,9 +65,5 @@ namespace AnyCompany.Implementations
             this._orderRepo.Save(order);
         }
 
-        public bool ValidateCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
