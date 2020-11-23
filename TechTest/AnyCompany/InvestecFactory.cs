@@ -17,7 +17,7 @@ namespace AnyCompany
 
         public static IValidateCustomer GetValidateCustomerFromUSValidator()
         {
-            return new ValidateCustomerFromUS();
+            return new ValidateCustomerFromUK();
         }
 
 

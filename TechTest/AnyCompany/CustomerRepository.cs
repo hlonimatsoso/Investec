@@ -12,20 +12,31 @@ namespace AnyCompany
             Customer customer = new Customer();
 
             SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
-                connection);
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                customer.Name = reader["Name"].ToString();
-                customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
-                customer.Country = reader["Country"].ToString();
+                connection.Open();
+
+                SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
+                    connection);
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    customer.Name = reader["Name"].ToString();
+                    customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+                    customer.Country = reader["Country"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error loading customerId '{customerId}'. Error Message: {ex.Message}", ex);
+            }
+            finally
+            {
+                connection.Close();
+
             }
 
-            connection.Close();
 
             return customer;
         }

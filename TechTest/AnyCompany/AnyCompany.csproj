@@ -44,7 +44,7 @@
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="Implementations\InvestecRepo.cs" />
     <Compile Include="Implementations\ValidateOrderAmount.cs" />
-    <Compile Include="Implementations\ValidateCustomerFromUS.cs" />
+    <Compile Include="Implementations\ValidateCustomerFromUK.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\IInvestecRepo.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
