@@ -21,6 +21,7 @@ namespace AnyCompany
             bool isValidCustomer, isValidOrder;
             bool result = false;
             Customer customer = null;
+
             try
             {
 
@@ -35,15 +36,17 @@ namespace AnyCompany
 
                 // Save order
                 if (isValidCustomer && isValidOrder)
+                {
                     Repo.Save(order);
+                    result = true;
+                }
             }
             catch (System.Exception ex)
             {
-
                 throw new Exception($"Error placing order ID '{order?.OrderId}' for customer {customer?.Name} (customer ID: {customerId})", ex);
             }
 
-            return true;
+            return result;
         }
 
     }

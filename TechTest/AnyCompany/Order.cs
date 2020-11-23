@@ -2,6 +2,12 @@
 {
     public class Order
     {
+        public Order()
+        {
+            this.Customer = new Customer();
+        }
+
+
         public int OrderId { get; set; }
 
         public double Amount { get; set; }

@@ -5,11 +5,12 @@ namespace AnyCompany
 {
     public static class CustomerRepository
     {
-        private static string ConnectionString = @"Data Source=(local);Database=Customers;User Id=admin;Password=password;";
+        private static string ConnectionString = Constants.CustomersConnectionString;
 
         public static Customer Load(int customerId)
         {
             Customer customer = new Customer();
+            OrderRepository ordersRepo = InvestecFactory.GetOrderRepository();
 
             SqlConnection connection = default;
             try
@@ -17,7 +18,7 @@ namespace AnyCompany
                 connection = new SqlConnection(ConnectionString);
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SELECT * FROM Customer WHERE CustomerId = " + customerId,
+                SqlCommand command = new SqlCommand(Constants.LoadCustomersQuery + customerId,
                     connection);
                 var reader = command.ExecuteReader();
 
@@ -26,6 +27,7 @@ namespace AnyCompany
                     customer.Name = reader["Name"].ToString();
                     customer.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                     customer.Country = reader["Country"].ToString();
+                    customer.Orders = ordersRepo.LoadOrdersForCustomer(customerId);
                 }
             }
             catch (Exception ex)

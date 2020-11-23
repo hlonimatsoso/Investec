@@ -5,6 +5,13 @@ namespace AnyCompany
 {
     public class Customer
     {
+        public Customer()
+        {
+            this.Orders = new List<Order>();
+        }
+
+        public int CustomerID { get; set; }
+
         public string Country { get; set; }
 
         public DateTime DateOfBirth { get; set; }
